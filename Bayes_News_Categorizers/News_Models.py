@@ -8,6 +8,14 @@ import matplotlib.pyplot as plt
 
 data = pd.read_csv('parsed_news_data.csv')
 
+print("Dataset shape:", data.shape)
+print("\nFirst 5 rows:")
+print(data.head())
+print("\nDataset info:")
+print(data.info())
+print("\nCategory distribution:")
+print(data['category'].value_counts())
+
 def test_short_description_classifier():
     # Step 3: Prepare text data and target
     X_text = data['short_description']  # Text data for classification
