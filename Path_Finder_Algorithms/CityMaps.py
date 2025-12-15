@@ -1,5 +1,7 @@
-#File just to simplyfy the import of the maps to look cleaner on the search algorithms!
-# Define the city dictionaries
+"""
+    File just to simplyfy the import of the maps to look cleaner on the search algorithms!
+    Define the city dictionaries
+"""
 Phoenix_cities = {
     'Phoenix': {'Mesa': 17, 'Scottsdale': 12, 'Tempe': 9, 'Chandler': 24, 'Glendale': 10, 'Peoria': 20, 'Surprise': 25, 'Avondale': 15},
     'Mesa': {'Phoenix': 17, 'Tempe': 7, 'Chandler': 15, 'Glendale': 25},

@@ -1,35 +1,51 @@
 import heapq
 
+"""
+Andre Pont - 23164034
+
+UNIFORM COST SEARCH (UCS) ALGORITHM FOR CITY NAVIGATION
+
+This algorithm was understood and adapted from the USC.ipynb lab code from week 3
+the only difference is the dataset, since the same code will work for the graph that 
+was given as a CA resource: CityMaps.ipynb (which I copied into a .py file to be able to use it as an import).
+
+======================================================
+Uniform Cost Search finds the optimal (lowest cost) path
+between two nodes by exploring paths in order of increasing cost.
+Similar to Dijkstra's algorithm but stops when goal is found but 
+Does NOT use heuristics unlike A* 
+
+Parameters:
+- graph: Dictionary of {city: {neighbor: distance}} representing city connections
+- start: Starting city name
+- goal: Destination city name
+
+Returns:
+- cost: Total distance of the optimal route
+- path: List of cities in optimal route from start to goal
+"""
 def uniform_cost_search(graph, start, goal):
-    # Priority queue to store (cost, node) and initialize with the start node
     pq = [(0, start)]
-    
-    # Dictionary to store the cost to reach each node, initialize start node cost as 0
     costs = {start: 0}
-    
-    # Dictionary to store the parent of each node for path reconstruction
     parent = {start: None}
     
+    # MAIN SEARCH LOOP
     while pq:
         current_cost, current_node = heapq.heappop(pq)
-        
-        # If we reach the goal, return the cost and the path
         if current_node == goal:
             path = []
             while current_node is not None:
                 path.append(current_node)
                 current_node = parent[current_node]
-            path.reverse()  # Reverse the path to get the correct order
-            return current_cost, path
-        
-        # Explore neighbors of the current node
+            # Return optimal cost and path in correct order (start → goal)
+            path.reverse()
+            return path, current_cost
+        # NEIGHBOR EXPLORATION
         for neighbor, edge_cost in graph[current_node].items():
             new_cost = current_cost + edge_cost
-            
-            # If the new path to the neighbor is cheaper, update and push to queue
             if neighbor not in costs or new_cost < costs[neighbor]:
-                costs[neighbor] = new_cost
+                costs[neighbor] = new_cost  
                 parent[neighbor] = current_node
                 heapq.heappush(pq, (new_cost, neighbor))
-    
-    return float('inf'), []  # Return infinite cost and empty path if goal is not reachable
+    # NO PATH FOUND: Return failure indicators
+    return float('inf'), []  
