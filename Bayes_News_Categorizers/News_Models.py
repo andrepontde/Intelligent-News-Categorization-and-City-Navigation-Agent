@@ -108,7 +108,7 @@ def headline_classifier():
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
                 xticklabels=sorted(data['category'].unique()), 
                 yticklabels=sorted(data['category'].unique()))
-    plt.title('Confusion Matrix - Short Descriptions Classifier')
+    plt.title('Confusion Matrix - Headline Only Classifier')
     plt.ylabel('Actual Category')
     plt.xlabel('Predicted Category')
     plt.xticks(rotation=45)
